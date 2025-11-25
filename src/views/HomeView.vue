@@ -8,6 +8,7 @@
       <section class="posts-container">
         <Post v-for="(post, index) in posts" :key="index" :post="post" @like="incrementLike(index)"/>
       </section>
+      <button @click="resetLikes" class="reset-button">Reset Likes</button>
     </main>
   </div>
 </template>
@@ -43,6 +44,12 @@ export default {
    methods: {
     incrementLike(index) {
       this.posts[index].likes++;
+    },
+    resetLikes() {
+      this.posts = this.posts.map(post => ({
+        ...post,
+        likes: 0
+      }));
     }
   }
 };
@@ -119,6 +126,19 @@ main.add-post, main.login, main.index {
   border-radius: 4px;
   margin: 0.5rem auto;
   box-sizing: border-box;
+}
+
+.reset-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #cecccc;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+} 
+
+.reset-button:hover {
+  background-color: #918f8f;
 }
 
 /* Responsive */
